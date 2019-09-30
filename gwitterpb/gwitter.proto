@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package gwitter;
+
+option go_package = "gwitterpb";
+
+message Gweet {
+    string id = 1;
+    string user_id = 2;
+    string content = 3;
+}
+
+message PostGwitterRequest{
+    Gweet gweet = 1;
+}
+
+message PostGwitterResponse{
+    Gweet gweet = 1;
+}
+
+message ReadGwitterRequest{
+    string gweet_id = 1;
+}
+
+message ReadGwitterResponse {
+    Gweet gweet = 1;
+}
+
+
+message UpdateGwitterRequest{
+    Gweet gweet = 1;
+}
+
+message UpdateGwitterResponse {
+    Gweet gweet = 1;
+}
+
+message DeleteGwitterRequest {
+    string gweet_id = 1;
+}
+
+message DeleteGwitterResponse {
+    string gweet_id = 1;
+}
+
+message ListGwitterRequest {
+
+}
+
+message ListGwitterResponse {
+    Gweet gweet = 1;
+}
+
+
+service GweetService{
+    rpc PostGwitter (PostGwitterRequest) returns (PostGwitterResponse);
+    rpc ReadGwitter (ReadGwitterRequest) returns (ReadGwitterResponse);
+    rpc UpdateGwitter (UpdateGwitterRequest) returns (UpdateGwitterResponse);
+    rpc DeleteGwitter (DeleteGwitterRequest) returns (DeleteGwitterResponse); // return NOT_FOUND if not found
+    rpc ListGwitter (ListGwitterRequest) returns (stream ListGwitterResponse);
+}
